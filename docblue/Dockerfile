@@ -10,7 +10,7 @@ RUN apt-get update && \
     echo "Python and tools installed."
 
 # Make sure is executable or set permissions manually in bash
-RUN sudo chmod +x custom-entrypoint.sh
+RUN chmod +x custom-entrypoint.sh
 
 # Set working directory
 WORKDIR /home/bor/docblue
