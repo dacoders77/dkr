@@ -1,0 +1,37 @@
+services:
+  python:
+    container_name: bor-ubu
+    network_mode: "host"
+    build:
+      context: .
+      dockerfile: Dockerfile
+    stdin_open: true
+    tty: true
+    volumes:
+      - ../b-dev:/home/bor/b-dev
+      - ../docblue:/home/bor/docblue
+    entrypoint: /home/bor/docblue/custom-entrypoint.sh
+
+  db:
+    image: postgres
+    container_name: bor-db
+    restart: always
+    shm_size: 128mb
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: bor
+      POSTGRES_PASSWORD: 659111
+      POSTGRES_DB: boris
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    restart: always
+    ports:
+      - "80:80" # When adding new db server. In the connection tab use Host name / address: bor-db (container name, no need to use ip)
+    environment:
+      PGADMIN_DEFAULT_EMAIL: bor@bor.com # Pgadmin login
+      PGADMIN_DEFAULT_PASSWORD: 659111 # Pgadmin pass
