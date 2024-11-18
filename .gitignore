@@ -9,5 +9,6 @@
 *.log
 *.tmp
 
-# Ignor Pycharm system folders
+# Ignor Pycharm system folders everywhere
 /.idea
+/docblue/.idea
