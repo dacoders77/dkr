@@ -9,8 +9,11 @@ RUN apt-get update && \
     apt-get install -y python3.12 python3.12-venv python3-pip git nano && \
     echo "Python and tools installed."
 
+# Copy files from host to container. Otherwise chmod wont work
+COPY . .
+
 # Make sure is executable or set permissions manually in bash
-RUN chmod +x /home/bor/docblue/custom-entrypoint.sh
+RUN chmod +x custom-entrypoint.sh
 
 # Set working directory
 WORKDIR /home/bor/docblue
