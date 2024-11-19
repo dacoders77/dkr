@@ -1,7 +1,7 @@
-import numpy as np
+class Dog:
+    def bark(self):
+        print("bark")
 
-arr = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+d = Dog()
 
-print(arr)
 
-# Deleted all comments. Head and everthing. Commited and pushed 
