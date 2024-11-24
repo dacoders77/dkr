@@ -23,5 +23,5 @@ class Animal(Dog, Fish):
 a = Animal()
 a.swim()
 Fish.swim(a) # Calling swim method, which is overridden if Animal is created
-
+# Time to merge
 
