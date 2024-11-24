@@ -16,6 +16,7 @@ class Fish:
 
 class Animal(Dog, Fish):
     def animal(self):
+        # 2nd commit to main
         pass
     def swim(self):
         print("swimm from animal")
