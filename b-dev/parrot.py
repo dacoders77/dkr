@@ -1,21 +1,18 @@
-class Person:
-    number_of_people = 0
-    GRAVITY = 9.8 # Constant
+class Math:
 
-    def __init__(self, name):
-        self.name = name
-        Person.number_of_people += 1
+    @staticmethod # Decorator
+    def add5(x): # No need to pass self or cls
+        return x + 5
 
-    @classmethod # Decorator
-    def number_of_people_(cls):
-        return cls.number_of_people
+    @staticmethod
+    def add10(x):
+        return x + 10
 
-    @classmethod
-    def add_person(cls):
-        cls.number_of_people += 1
+    @staticmethod
+    def pr():
+        print("run")
+
+Math.pr()
 
 
-p1 = Person('Tim')
-p2 = Person('Jill')
-print(Person.number_of_people_())
 
