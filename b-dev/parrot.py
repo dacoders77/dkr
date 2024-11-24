@@ -8,6 +8,7 @@ class Dog:
     def __init__(self):
         print("Animal constructor called")
     def bark(self):
+        print("3rd to main")
         pass
 
 class Fish:
