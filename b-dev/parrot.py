@@ -1,18 +1,7 @@
-class Math:
+def person(name, **data):
+    print(name)
 
-    @staticmethod # Decorator
-    def add5(x): # No need to pass self or cls
-        return x + 5
+    for i,j in data.items():
+        print(i,j)
 
-    @staticmethod
-    def add10(x):
-        return x + 10
-
-    @staticmethod
-    def pr():
-        print("run")
-
-Math.pr()
-
-
-
+person('Navin', age=28, city='Moscow', mob=3055494152)
