@@ -1,7 +1,23 @@
-def person(name, **data):
-    print(name)
+class Dog():
+    def __init__(self, name):
+        print("constructor called. name: " + name)
 
-    for i,j in data.items():
-        print(i,j)
+    def cry(self):
+        pass
 
-person('Navin', age=28, city='Moscow', mob=3055494152)
+class Speak():
+    def __init__(self, name):
+        print("speak")
+    def jump(self):
+        print("jump")
+
+class Bark:
+    def __init__(self):
+        print("bark")
+
+class Animal(Speak):
+    pass
+
+a = Animal("jack")
+a.jump()
+
