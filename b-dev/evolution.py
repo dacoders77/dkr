@@ -1,5 +1,6 @@
 # Create base Pet class
 
+
 # Puppy: Loves to play and is always energetic but needs a lot of food and attention.
 # Kitten: Curious and loves to explore, but has low energy and becomes bored quickly.
 # Bunny: Shy and sleepy, but very happy when well-cared for.
@@ -27,57 +28,78 @@
 # it will evolve into a new stage. The evolution process may unlock new attributes, actions, or even a new pet type.
 
 class Pet:
+    # Shared properties
     def __init__(self, hunger, happiness, energy):
         self.hunger = hunger
         self.happiness = happiness
         self.energy = energy
 
-    def petting(self) -> None:
+    def pet(self) -> None:
         pass
 
-    def training(self) -> None:
+    def train(self) -> None:
         pass
 
     def bath(self) -> None:
         pass
 
-    def petting(play) -> None:
+    def play(self) -> None:
         pass
 
-    def petting(feed) -> None:
+    def feed(self) -> None:
         pass
 
     def special_action(self) -> None:
         pass
 
-class Puppy(Pet):
-    # No constructor needed. It will be used from the parent class
-    hunger = None # Private attributes. Accessible only via getter and setter
-    happiness = None
-    _value = None
-    def petting(self) -> None:
-        print("puppy.Petting method is overridden")
+# Class Puppy inherits from Pet
+# I want to add class properties to Pet which will be private, not visible from outside
+# Getter and setter should be used
+# Can be done via decorators: @staticmethod, @classmethod (takes cls instead of self)
+
+# A mixin class to add properties and getters/setters to pets
+class PetBaseAttributes:
+    # Good way to talk about private / protected attribute. It's convention
+    # Private attributes. Accessible only via getter and setter
+    _hunger = None
+    _happiness = None
+    _energy = None
 
     # Getter using decorator
     # cls - stands for class. It's a referral to Class rather than to self, which stands for and instance of the class
     # Serves the same way but more correct
     @classmethod
-    def set_value(cls, value):
-        cls._value = value
-ex
+    def set_value(cls, hunger:int, happiness:int,energy:int) -> None:
+        cls._hunger = hunger
+        cls._happiness = happiness
+        cls._energy = energy
+
     # Getter method to retrieve the private attribute
     @classmethod
-    def get_value(cls):
-        return cls._value
+    def get_value(cls) -> dict:
+        return {"hunger": cls._hunger, "happiness": cls._happiness, "energy": cls._energy}
 
 
-class Knight(Pet):
+
+class Puppy(Pet, PetBaseAttributes):
+    # No constructor needed
+    def pet(self) -> None:
+        print("puppy.Petting method is overridden")
+
+
+class Kitten(Pet):
     pass
 
 class Dragon(Pet):
     pass
 
-# pet = Pet(5, 21, 44)
+
+
+
 pup = Puppy(1,22,9)
-pup.set_value(10)
+pup.set_value(10, 20, 30)
 print(pup.get_value())
+
+print(pup.energy)
+
+#print(help(pup)) # Good, show structure of the object!
