@@ -1,31 +1,5 @@
-# Create base Pet class
+from clas_finder import *
 
-
-# Puppy: Loves to play and is always energetic but needs a lot of food and attention.
-# Kitten: Curious and loves to explore, but has low energy and becomes bored quickly.
-# Bunny: Shy and sleepy, but very happy when well-cared for.
-# Dragon: A fantasy pet with unique needs – it loves to hoard things and its hunger and energy are unusually high.
-# Turtle: Slow-moving and enjoys naps, but requires regular interaction to stay happy.
-
-# Petting: Petting your pet boosts its happiness but slightly decreases energy. Perfect for bonding.
-# Training: Teach your pet tricks! This boosts energy but decreases hunger and happiness.
-# Giving a Bath: Makes the pet feel refreshed, increasing energy, but it might not like it – happiness could drop temporarily.
-# Play: Engages the pet in playtime, increasing happiness but making it hungrier and more tired.
-# Feed: Keep your pet full! Feeding reduces hunger but might cause it to become lazy if overdone.
-# Special Action - Evolution: As the pet reaches certain milestones (such as age or special achievements),
-# it will evolve into a new stage. The evolution process may unlock new attributes, actions, or even a new pet type.
-
-# You will create a base class, Pet, with shared properties like hunger, happiness, and energy +
-# Then, specific pet types such as Puppy, Kitten, or Dragon will inherit from this base class ?
-# and override methods to implement their own unique behaviors. This allows for efficient code reuse and organization.
-
-# Petting: Petting your pet boosts its happiness but slightly decreases energy. Perfect for bonding.
-# Training: Teach your pet tricks! This boosts energy but decreases hunger and happiness.
-# Giving a Bath: Makes the pet feel refreshed, increasing energy, but it might not like it – happiness could drop temporarily.
-# Play: Engages the pet in playtime, increasing happiness but making it hungrier and more tired.
-# Feed: Keep your pet full! Feeding reduces hunger but might cause it to become lazy if overdone.
-# Special Action - Evolution: As the pet reaches certain milestones (such as age or special achievements),
-# it will evolve into a new stage. The evolution process may unlock new attributes, actions, or even a new pet type.
 
 class Pet:
     # Shared properties
@@ -34,21 +8,28 @@ class Pet:
         self.happiness = happiness
         self.energy = energy
 
+    # Petting your pet boosts its happiness but slightly decreases energy. Perfect for bonding.
     def pet(self) -> None:
         pass
 
+    # Teach your pet tricks! This boosts energy but decreases hunger and happiness
     def train(self) -> None:
         pass
 
+    # Makes the pet feel refreshed, increasing energy, but it might not like it – happiness could drop temporarily.
     def bath(self) -> None:
         pass
 
+    # Engages the pet in playtime, increasing happiness but making it hungrier and more tired.
     def play(self) -> None:
         pass
 
+    # Keep your pet full! Feeding reduces hunger but might cause it to become lazy if overdone
     def feed(self) -> None:
         pass
 
+    # As the pet reaches certain milestones (such as age or special achievements), it will evolve into a new stage.
+    # The evolution process may unlock new attributes, actions, or even a new pet type.
     def special_action(self) -> None:
         pass
 
@@ -84,22 +65,74 @@ class PetBaseAttributes:
 class Puppy(Pet, PetBaseAttributes):
     # No constructor needed
     def pet(self) -> None:
-        print("puppy.Petting method is overridden")
-
+        print("Puppy.petting method is overridden")
 
 class Kitten(Pet):
-    pass
+    def pet(self) -> None:
+        print("Kitten.petting method is overridden")
+
+class Bunny(Pet):
+    def pet(self) -> None:
+        pass
 
 class Dragon(Pet):
-    pass
+    def fly(self) -> None:
+        print ("Dragon.fly method. NOT overriden")
+
+class Turtle(Pet):
+    def fly(self) -> None:
+        pass
+
+
+# Classes
+
+
+# Functions
+def welcome_menu():
+    print("Welcome to Virtual Pet Evolution game!")
+
+
+def classes_show():
+    # Initialize the list to hold class names
+    names = []
+
+    # Iterate through the objects returned by find_inherited_classes
+    for class_name, path in find_inherited_classes():
+        # Append each class name to the list
+        names.append(class_name)
+
+    # Return the completed list
+    return names
+
+
+# User input
+
+
+stop_game_flag = False
+
+# Reserved for thread stop:
+while not stop_game_flag:
+    try:
+        # Render the menu using classes from class_finder.py
+        user_input = int(input(classes_show()))
+        # clear screen here?
+        match user_input:
+            case 1:
+                print("oye 1")
+        # clear screen here?
+    except ValueError:
+        print("Not a number")
+
+#    print(user_input)
 
 
 
 
-pup = Puppy(1,22,9)
-pup.set_value(10, 20, 30)
-print(pup.get_value())
 
-print(pup.energy)
+
+
+
+
+
 
 #print(help(pup)) # Good, show structure of the object!
