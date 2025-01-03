@@ -7,6 +7,7 @@ class Pet:
         self.hunger = hunger
         self.happiness = happiness
         self.energy = energy
+        self.pet_type = ""
 
     # Petting your pet boosts its happiness but slightly decreases energy. Perfect for bonding.
     def pet(self) -> None:
@@ -26,7 +27,7 @@ class Pet:
 
     # Keep your pet full! Feeding reduces hunger but might cause it to become lazy if overdone
     def feed(self) -> None:
-        pass
+        print("feed method of class Pet is called")
 
     # As the pet reaches certain milestones (such as age or special achievements), it will evolve into a new stage.
     # The evolution process may unlock new attributes, actions, or even a new pet type.
@@ -60,8 +61,6 @@ class PetBaseAttributes:
     def get_value(cls) -> dict:
         return {"hunger": cls._hunger, "happiness": cls._happiness, "energy": cls._energy}
 
-
-
 class Puppy(Pet, PetBaseAttributes):
     # No constructor needed
     def pet(self) -> None:
@@ -73,7 +72,7 @@ class Kitten(Pet):
 
 class Bunny(Pet):
     def pet(self) -> None:
-        pass
+        print("---Bunny.petting method is overridden")
 
 class Dragon(Pet):
     def fly(self) -> None:
@@ -81,50 +80,98 @@ class Dragon(Pet):
 
 class Turtle(Pet):
     def fly(self) -> None:
-        pass
+        print("____Turtle.fly method. NOT overriden")
+
+# Find all classes that inherit from Pet. They wil be used as menu items
+class ChildClasses:
+    # Returns the list of child class either as list or as text with \n symbols (to render menu)
+    @staticmethod
+    def show(like: str) -> str | list:
+        # Initialize the list to hold class names
+        child_classes_names = []
+        pets_menu = ""  # Contains pets list as vertical menu
+        menu_item_number = 1  # Menu starting number
+
+        # Iterate through the objects returned by find_inherited_classes
+        for class_name, path in find_inherited_classes():
+            # Append each class name to the list
+            child_classes_names.append(class_name)
+            # Make a text where the names will be located on separate lines
+            pets_menu += str(menu_item_number) + ". " + class_name + "\n"
+            menu_item_number += 1
+
+        # return child_classes_names
+        if like == "str":
+            return pets_menu
+        else:
+            return child_classes_names
 
 
-# Classes
 
 
 # Functions
+
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
 def welcome_menu():
     print("Welcome to Virtual Pet Evolution game!")
 
 
-def classes_show():
-    # Initialize the list to hold class names
-    names = []
-
-    # Iterate through the objects returned by find_inherited_classes
-    for class_name, path in find_inherited_classes():
-        # Append each class name to the list
-        names.append(class_name)
-
-    # Return the completed list
-    return names
-
 
 # User input
 
-
+clear_screen()
 stop_game_flag = False
 
 # Reserved for thread stop:
 while not stop_game_flag:
+    print("Pet Evolution game:")
     try:
-        # Render the menu using classes from class_finder.py
-        user_input = int(input(classes_show()))
-        # clear screen here?
+        # Render the menu using classes from class_finder.py function
+        user_input = int(input(ChildClasses.show("str")))
+
+
+
+        try:
+            # Dynamicly creating an instance of the class
+            class_name = ChildClasses.show("list")[user_input - 1]
+            #class_name = "s"
+            class_instance_name = "instance"
+
+
+            # handle the case if the given dynamic name of the calss to be created doesn't exist
+            if class_name in globals():
+                globals()[class_instance_name] = globals()[class_name](1,2,3) # Works good
+            else:
+                print(f"Class {class_name} not found")
+
+        except Exception as e:
+            print(f"Index out of range. No such menu item: {e}")
+
+
+        method_name = "train2"
+
+        # Dump methods
+        #methods = [func for func in dir(instance) if callable(getattr(instance, func)) and not func.startswith("__")]
+        #print(methods)
+
+        if hasattr(instance, method_name):
+            getattr(instance, method_name)()
+        else:
+            print(f"Method {method_name} doesn't exists in class: {instance.__class__.__name__}")
+
+
+
+
         match user_input:
             case 1:
                 print("oye 1")
-        # clear screen here?
+
     except ValueError:
         print("Not a number")
 
 #    print(user_input)
-
 
 
 

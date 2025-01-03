@@ -10,11 +10,10 @@ from pathlib import Path
 
 script_dir = Path(__file__).resolve().parent
 
-def find_inherited_classes(base_class = "Pet", path = script_dir):
+def find_inherited_classes(base_class = "Pet", path = script_dir) -> list:
     inherited_classes = []
     # Go through file structure. Get files for each dir
     for root, _, files in os.walk(path):
-        #print(f"root: {root}, line: {_}, files: {files}")
         for file in files:
             if file.endswith(".py"):
                 file_path = os.path.join(root, file)
@@ -28,11 +27,3 @@ def find_inherited_classes(base_class = "Pet", path = script_dir):
                                     # Add as tuple?
                                     inherited_classes.append((node.name, file_path))
     return inherited_classes
-
-# def clear_screen():
-#     os.system('cls' if os.name == 'nt' else 'clear')
-#
-# clear_screen()
-# classes = find_inherited_classes()
-# for path, class_name in classes:
-#     print(f"Path: {path} : {class_name}")
