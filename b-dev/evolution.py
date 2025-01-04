@@ -117,7 +117,46 @@ def clear_screen():
 def welcome_menu():
     print("Welcome to Virtual Pet Evolution game!")
 
+def show_main_menu():
+    # Render the main menu using classes that inherit from Pet using class_finder.py function
+    # The menu already returned as the line items
+    user_input = int(input(ChildClasses.show("str")))
+    try:
+        # Dynamically creating an instance of the class
+        class_name = ChildClasses.show("list")[user_input - 1]
+        # A variable for class instance. Will be created manically based on what type of pet is selected
+        class_instance_name = "instance"
 
+        # If such class exist
+        if class_name in globals():
+            globals()[class_instance_name] = globals()[class_name](1, 2, 3)  # Create instance
+            print(f"You selected the Pet: {instance.__class__.__name__}")
+        else:
+            print(f"Class {class_name} not found")
+
+    except Exception as e:
+        print(f"Index out of range. No such menu item: {e}")
+    return
+
+def show_action_menu():
+    user_input = input("--- Select an action")
+    match user_input:
+        case 1:
+            print("oye 1")
+            method_name = "feed"  # train, pet
+
+            # Dump methods of 'instance'
+            # methods = [func for func in dir(instance) if callable(getattr(instance, func)) and not func.startswith("__")]
+            # print(methods)
+
+            # If the dynamically created class has the following method
+            if hasattr(instance, method_name):
+                # Call method
+                getattr(instance, method_name)()
+            else:
+                print(f"Method {method_name} doesn't exists in class: {instance.__class__.__name__}")
+
+    return
 
 # User input
 
@@ -126,50 +165,14 @@ stop_game_flag = False
 
 # Reserved for thread stop:
 while not stop_game_flag:
-    print("Pet Evolution game:")
+    print("---\nMain menu. Pet Evolution game:")
     try:
-        # Render the menu using classes from class_finder.py function
-        user_input = int(input(ChildClasses.show("str")))
-
-
-
-        try:
-            # Dynamicly creating an instance of the class
-            class_name = ChildClasses.show("list")[user_input - 1]
-            #class_name = "s"
-            class_instance_name = "instance"
-
-
-            # handle the case if the given dynamic name of the calss to be created doesn't exist
-            if class_name in globals():
-                globals()[class_instance_name] = globals()[class_name](1,2,3) # Works good
-            else:
-                print(f"Class {class_name} not found")
-
-        except Exception as e:
-            print(f"Index out of range. No such menu item: {e}")
-
-
-        method_name = "train2"
-
-        # Dump methods
-        #methods = [func for func in dir(instance) if callable(getattr(instance, func)) and not func.startswith("__")]
-        #print(methods)
-
-        if hasattr(instance, method_name):
-            getattr(instance, method_name)()
-        else:
-            print(f"Method {method_name} doesn't exists in class: {instance.__class__.__name__}")
-
-
-
-
-        match user_input:
-            case 1:
-                print("oye 1")
-
+        show_main_menu()
+        show_action_menu()
     except ValueError:
-        print("Not a number")
+        print("Wrong input. Not a number")
+
+
 
 #    print(user_input)
 
