@@ -1,4 +1,5 @@
 from clas_finder import *
+import keyboard
 
 
 class Pet:
@@ -111,6 +112,11 @@ class ChildClasses:
 
 # Functions
 
+def press_any_key() -> None:
+    print("Press any key")
+    keyboard.read_event()
+    print("Not main")
+
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -121,6 +127,7 @@ def show_main_menu():
     # Render the main menu using classes that inherit from Pet using class_finder.py function
     # The menu already returned as the line items
     user_input = int(input(ChildClasses.show("str")))
+
     try:
         # Dynamically creating an instance of the class
         class_name = ChildClasses.show("list")[user_input - 1]
@@ -130,59 +137,50 @@ def show_main_menu():
         # If such class exist
         if class_name in globals():
             globals()[class_instance_name] = globals()[class_name](1, 2, 3)  # Create instance
+            clear_screen()
             print(f"You selected the Pet: {instance.__class__.__name__}")
         else:
             print(f"Class {class_name} not found")
 
     except Exception as e:
         print(f"Index out of range. No such menu item: {e}")
+
     return
 
 def show_action_menu():
-    user_input = input("--- Select an action")
-    match user_input:
-        case 1:
-            print("oye 1")
-            method_name = "feed"  # train, pet
 
-            # Dump methods of 'instance'
-            # methods = [func for func in dir(instance) if callable(getattr(instance, func)) and not func.startswith("__")]
-            # print(methods)
+    while True:
+        user_input = input("--- Select an action. Step 2. Action menu1")
 
-            # If the dynamically created class has the following method
-            if hasattr(instance, method_name):
-                # Call method
-                getattr(instance, method_name)()
-            else:
-                print(f"Method {method_name} doesn't exists in class: {instance.__class__.__name__}")
+        match user_input:
+            case 1:
+                print("oye 1")
+                method_name = "feed"  # train, pet
 
-    return
+                # Dump methods of 'instance'
+                # methods = [func for func in dir(instance) if callable(getattr(instance, func)) and not func.startswith("__")]
+                # print(methods)
+
+                # If the dynamically created class has the following method
+                if hasattr(instance, method_name):
+                    # Call method
+                    getattr(instance, method_name)()
+                else:
+                    print(f"Method {method_name} doesn't exists in class: {instance.__class__.__name__}")
+
+        #return # In return go to previous menu step
 
 # User input
 
 clear_screen()
-stop_game_flag = False
+stop_game_flag = False # Reserved for thread stop:
 
-# Reserved for thread stop:
+# Main game loop
 while not stop_game_flag:
-    print("---\nMain menu. Pet Evolution game:")
+    print("---\nMain menu. Pet Evolution game. Select your pet:")
     try:
         show_main_menu()
         show_action_menu()
     except ValueError:
         print("Wrong input. Not a number")
 
-
-
-#    print(user_input)
-
-
-
-
-
-
-
-
-
-
-#print(help(pup)) # Good, show structure of the object!
