@@ -176,11 +176,12 @@ clear_screen()
 stop_game_flag = False # Reserved for thread stop:
 
 # Main game loop
+# Random events will be added here: aging, mood change etc. d
 while not stop_game_flag:
     print("---\nMain menu. Pet Evolution game. Select your pet:")
     try:
         show_main_menu()
-        show_action_menu()
+        show_action_menu() # This is gonna be state machine menu
     except ValueError:
         print("Wrong input. Not a number")
 

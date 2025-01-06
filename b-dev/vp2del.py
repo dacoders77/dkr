@@ -1,3 +1,9 @@
+# Transaction type actions handling
+# If an action reaches certain limits, it will not pass
+# If Pet's hunger is already 0 and you apply feed action, it will put hunger to negative values
+# This transaction will not pass
+
+
 class Pet():
     def __init__(self):
         self.name = "Bobik"
