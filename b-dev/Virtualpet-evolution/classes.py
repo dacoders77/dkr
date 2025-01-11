@@ -1,3 +1,8 @@
+import threading
+from time import sleep
+from datetime import datetime
+
+
 class Pet:
     # Shared properties
     def __init__(self, hunger, happiness, energy):
@@ -78,3 +83,28 @@ class Dragon(Pet):
 class Turtle(Pet):
     def fly(self) -> None:
         print("____Turtle.fly method. NOT overriden")
+
+# Game main loop thread
+# now let it just print something
+class GameThread(threading.Thread):
+    def __init__(self, main_menu_func) -> None:
+        super().__init__() # Call original constructor (it may have its own logic) since we inherit from Thread
+        self.stop_event = threading.Event() # Start/stop thread flag (built-in parent class)
+        self.main_menu_func = main_menu_func
+
+
+    # We override the method from the parent class
+    def run(self) -> None:
+        while not self.stop_event.is_set(): # True by default. False - will stop the thread
+            print("Classes.py: yo bro")
+            print(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+            # Call here show_actions_menu
+            #self.main_menu_func()
+            sleep(0.5)
+
+    def stop(self) -> None:
+        print("Stop da thread!")
+        self.stop_event.set()
+
+
+

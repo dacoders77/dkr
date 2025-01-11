@@ -10,17 +10,15 @@ RUN apt-get update && \
     echo "Python and tools installed."
 
 # Copy files from host to container. Otherwise chmod wont work. Can copy only sh file as well if needed
-#COPY . . # Stopped working by itself. Works fine on prod. Reason - line ending. Set to LF instead of CRLF!!!
-
+# COPY . . # Stopped working by itself. Works fine on prod. Reason - line ending. Set to LF instead of CRLF!!!
 COPY custom-entrypoint.sh /home/bor/docblue/
 
 # Make sure is executable or set permissions manually in bash
 #RUN chmod +x custom-entrypoint.sh
 RUN chmod +x /home/bor/docblue/custom-entrypoint.sh
 
-
 # Set working directory
-WORKDIR /home/bor/docblue
+WORKDIR /home/bor/b-dev
 
 
 

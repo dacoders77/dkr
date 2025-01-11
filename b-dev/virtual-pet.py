@@ -114,14 +114,14 @@ def print_main_menu():
 # Run thread here
 class RandomAction(threading.Thread):
     # Constructor
-    def __init__(self):
+    def __init__(self) -> None:
         # Since we are using a parent class - call the original constructor of that class
         # because it can use its own logic
         super().__init__()
         self.stop_event = threading.Event() # Start/stop thread flag (built-in parent class)
 
     # We override run method form the parent class
-    def run(self):
+    def run(self) -> None:
         while not self.stop_event.is_set():
             # Call interact method. Hunger increases over time
             player.interact(2,0,0,"Feed")

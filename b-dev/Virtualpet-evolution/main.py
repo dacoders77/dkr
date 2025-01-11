@@ -1,10 +1,13 @@
 from functions import *
-
-def clear_screen():
-    os.system('cls' if os.name == 'nt' else 'clear')
+import threading
+from time import sleep
 
 clear_screen()
-stop_game_flag = False # Reserved for thread stop:
+stop_game_flag = False # Reserved for thread stop?
+
+# Start the thread
+thread = GameThread(show_main_menu)
+thread.start()
 
 # Main menu. Select Pet type
 while True:
@@ -21,3 +24,8 @@ while not stop_game_flag:
         show_action_menu()
     except ValueError:
         print("Wrong input. Not a number")
+
+# Stop threads before exiting the game
+thread.join()
+thread.stop()
+print("Game over!")

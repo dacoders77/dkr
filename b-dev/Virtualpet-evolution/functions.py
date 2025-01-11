@@ -8,8 +8,6 @@ from classes import * # Import all classes from classes.py for dynamic creation 
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
-
-
 def show_main_menu():
     # Render the main menu using classes that inherit from Pet using class_finder.py function
     # Instance variable will be always underlined as red because it's assigned dynamically
