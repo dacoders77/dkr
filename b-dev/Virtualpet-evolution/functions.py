@@ -82,7 +82,7 @@ def show_child_classes(like: str) -> str | list:
     pets_menu = ""  # Contains pets list as vertical menu
     menu_item_number = 1  # Menu starting number
 
-    # Iterate through the objects returned by find_inherited_classes and make a numbered textual menu
+    # Iterate through the objects returned by find_inherited_classes and make a numbered textual-exmpl menu
     for class_name, path in find_inherited_classes():
         # Append each class name to the list
         child_classes_names.append(class_name)

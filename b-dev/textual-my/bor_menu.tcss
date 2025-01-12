@@ -1,0 +1,28 @@
+Screen {
+    align: center middle;
+}
+
+.box {
+    text-align: center;
+    height: 1fr;
+    border: solid green;
+}
+
+.stat-container {
+    align: center middle; /* Centers Stat in its container */
+    height: 3fr;          /* Adjust height to make it noticeable */
+    border: heavy blue;   /* Optional: Border for debugging */
+}
+
+#horizontal-layout {
+    align: center middle;
+    layout: horizontal;
+    background: black;
+    height: auto;
+    margin-left: 5;
+    margin-right: 5;
+}
+
+Button {
+    width: 25;
+}
