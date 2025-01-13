@@ -3,26 +3,61 @@ Screen {
 }
 
 .box {
-    text-align: center;
-    height: 1fr;
+    align: center middle;
     border: solid green;
+    width: auto;
+    height: auto;
 }
 
-.stat-container {
-    align: center middle; /* Centers Stat in its container */
-    height: 3fr;          /* Adjust height to make it noticeable */
-    border: heavy blue;   /* Optional: Border for debugging */
+
+.log-box {
+    content-align: center middle;
+    text-align: center;
+    border: heavy blue;
+    height: 10;
+    width: 60%;
 }
 
-#horizontal-layout {
+.horizontal {
+    align: center middle;
+    border: solid purple;
+    width: 30%;
+}
+
+
+.log {
+    content-align: center middle;
+    color: red;
+    background: gray;
+    width: 20;
+}
+
+
+.buttons {
+    text-align: center;
+    border: white;
+    height: 10;
+    width: 60%;
+}
+
+.words {
+        border: white;
+        width: auto;
+    }
+
+
+
+#buttons-container {
     align: center middle;
     layout: horizontal;
     background: black;
     height: auto;
     margin-left: 5;
-    margin-right: 5;
+    overflow-y: hidden;
 }
+
 
 Button {
     width: 25;
 }
+
