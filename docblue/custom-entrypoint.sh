@@ -4,6 +4,7 @@
 # Python project must be executed with venv activated manually in bash
 
 echo "custom-entrypoint.sh: Started"
+set -e # Exit on errors. Easier for debuting
 
 # Create the virtual environment if it doesn't exist
 if [ ! -d "/home/bor/docblue/myenv" ]; then
@@ -28,11 +29,20 @@ else
 fi
 
 # Install numpy if not already installed
+# FIX THISSSS!!! THIS IS ONLY ABOUT NUMPYYY!!
 if ! python -c "import numpy" &> /dev/null; then
-  echo "custom-entrypoint.sh: Installing numpy..."
-  pip install numpy
+  echo "custom-entrypoint.sh: Installing python tools..."
+  pip install numpy pip textual textual-dev
 else
-  echo "custom-entrypoint.sh: Numpy is already installed."
+  echo "custom-entrypoint.sh: Tool is already installed."
+fi
+
+# Install flask
+if ! python -c "import Flask" &> /dev/null; then
+  echo "custom-entrypoint.sh: Installing Flask"
+  pip install Flask
+else
+  echo "custom-entrypoint.sh: Flask is already installed."
 fi
 
 # Modify .bashrc to automatically activate the virtual environment on every bash session

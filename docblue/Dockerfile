@@ -7,7 +7,7 @@ FROM ubuntu:latest
 # Install Python and necessary tools
 RUN apt-get update && \
     apt-get install -y python3.12 python3.12-venv python3-pip git nano && \
-    echo "Python and tools installed."
+    echo "Dockerfile. Python and tools installed"
 
 # Copy files from host to container. Otherwise chmod wont work. Can copy only sh file as well if needed
 # COPY . . # Stopped working by itself. Works fine on prod. Reason - line ending. Set to LF instead of CRLF!!!

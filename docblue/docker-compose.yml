@@ -1,7 +1,6 @@
 services:
   python:
     container_name: bor-ubu
-    network_mode: "host"
     build:
       context: .
       dockerfile: Dockerfile
@@ -13,6 +12,8 @@ services:
     entrypoint: /home/bor/docblue/custom-entrypoint.sh
     mem_limit: 2g
     mem_reservation: 1g
+    ports:
+      - "8000:8000"
 
   db:
     image: postgres
