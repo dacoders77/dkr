@@ -69,7 +69,7 @@ class LogBox(Container):
     def compose(self) -> ComposeResult:
         yield Log()
 
-# Run the app
+#Run the app
 if __name__ == "__main__":
     app = BorMenu()
     app.run()
