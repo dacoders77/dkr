@@ -6,6 +6,12 @@
 echo "custom-entrypoint.sh: Started"
 set -e # Exit on errors. Easier for debuting
 
+# Remove the existing virtual environment if it exists
+if [ -d "/home/bor/docblue/myenv" ]; then
+  echo "custom-entrypoint.sh: Removing existing virtual environment..."
+  rm -rf /home/bor/docblue/myenv
+fi
+
 # Create the virtual environment if it doesn't exist
 if [ ! -d "/home/bor/docblue/myenv" ]; then
   echo "custom-entrypoint.sh: Creating virtual environment..."
@@ -20,30 +26,19 @@ else
 fi
 
 # Activate the virtual environment
-if [ -f "/home/bor/docblue/myenv/bin/activate" ]; then
-  echo "custom-entrypoint.sh: Activating virtual environment..."
-  source /home/bor/docblue/myenv/bin/activate
-else
-  echo "custom-entrypoint.sh: Activation script not found!" >&2
-  exit 1
-fi
+# do i need to activate if it's being activated in .bashrc?
+#if [ -f "/home/bor/docblue/myenv/bin/activate" ]; then
+#  echo "custom-entrypoint.sh: Activating virtual environment..."
+#  source /home/bor/docblue/myenv/bin/activate
+#else
+#  echo "custom-entrypoint.sh: Activation script not found!" >&2
+#  exit 1
+#fi
 
-# Install numpy if not already installed
-# FIX THISSSS!!! THIS IS ONLY ABOUT NUMPYYY!!
-if ! python -c "import numpy" &> /dev/null; then
-  echo "custom-entrypoint.sh: Installing python tools..."
-  pip install numpy pip textual textual-dev
-else
-  echo "custom-entrypoint.sh: Tool is already installed."
-fi
-
-# Install flask
-if ! python -c "import Flask" &> /dev/null; then
-  echo "custom-entrypoint.sh: Installing Flask"
-  pip install Flask
-else
-  echo "custom-entrypoint.sh: Flask is already installed."
-fi
+# Install python tools
+echo "custom-entrypoint.sh: Installing python tools..."
+#pip install --force-reinstall pip textual textual-dev Flask
+pip install pip textual textual-dev
 
 # Modify .bashrc to automatically activate the virtual environment on every bash session
 echo "source /home/bor/docblue/myenv/bin/activate" >> /root/.bashrc

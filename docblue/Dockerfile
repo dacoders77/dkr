@@ -1,5 +1,9 @@
 FROM ubuntu:latest
 
+
+# Set working directory
+WORKDIR /home/bor/b-dev
+
 # Create directory and set permissions
 # Works without creating the directory since it will be created during python3.12-venv installation
 #RUN mkdir -p /home/bor/docblue && chmod -R 777 /home/bor/docblue
@@ -17,8 +21,7 @@ COPY custom-entrypoint.sh /home/bor/docblue/
 #RUN chmod +x custom-entrypoint.sh
 RUN chmod +x /home/bor/docblue/custom-entrypoint.sh
 
-# Set working directory
-WORKDIR /home/bor/b-dev
+
 
 
 
