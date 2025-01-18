@@ -41,10 +41,14 @@ Screen {
 }
 
 .words {
-        border: white;
-        width: auto;
+    border: white;
+    width: auto;
     }
 
+.delete {
+    color: red;
+    border: blue;
+}
 
 
 #buttons-container {

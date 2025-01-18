@@ -1,10 +1,9 @@
 from cProfile import label
-
 from textual.app import App, ComposeResult
 from textual.containers import HorizontalGroup, Container, Horizontal, Vertical, Center
 from textual.widgets import Header, Footer, Label, Rule, Button, Digits, Log, Static
 
-# Logging: https://textual.textualize.io/guide/devtools/
+# Logging in separate console: https://textual.textualize.io/guide/devtools/
 
 # Main app
 class BorMenu(App):
@@ -14,13 +13,13 @@ class BorMenu(App):
     def compose(self) -> ComposeResult:
         # Containers
         self.static = Horizontal(Label("Virtual Pet Evolution v2.0"), classes="box")
-
         with Center():
-            yield self.static
+            yield self.static # App title
         with Center():
-            yield LogBox(classes="log-box")
+            yield LogBox(classes="log-box") # Box for log output
         with Center():
             yield Buttons(classes="buttons") # Css is linked via id in render
+
         with Center():
             yield Horizontal(
         Button("xx", variant="primary"),
@@ -57,17 +56,38 @@ class Buttons(Center):
 
     # Render. Buttons container
     def compose(self) -> ComposeResult:
-        yield Horizontal(
-                    Button("Walk", variant="success", tooltip="tooltip", action="notify('notify is shown')"),
-                         Label(" "),
-                         Button("Play", id="play", variant="success"),
-                         Label(" "),
-                         classes="box") # CSS class assigned to the whole Horizontal group
+        # yield Horizontal(
+        #             Button("Walk", variant="success", tooltip="tooltip", action="notify('notify is shown')"),
+        #                  Label(" "),
+        #                  Button("Play", id="play", variant="success"),
+        #                  Label(" "),
+        #                  classes="box") # CSS class assigned to the whole Horizontal group
+
+        lab = Label("We are gonna put a long text here, bro", id="dynamic_label", classes="delete")
+        lab.text = "we changed it"
+        lab.border_title = "ttl1"
+        lab.border_subtitle = "ttl2"
+        yield lab
+
+    def on_mount(self) -> None:
+        z = self.query_one(Label)
+        z.border_title = "border title"
+        z.text = "border ttl2"
+
+        dyn = self.query_one("#dynamic_label", Label)
+        dyn.update("Worked! Finnaly. SPent many time")
+
+
 
 # Log container
 class LogBox(Container):
     def compose(self) -> ComposeResult:
-        yield Log()
+        log = Log()
+        log.border_subtitle = "not working"
+        log.show_border = True
+        yield log
+
+
 
 #Run the app
 if __name__ == "__main__":
