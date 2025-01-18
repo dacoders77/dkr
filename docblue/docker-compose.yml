@@ -12,8 +12,6 @@ services:
     mem_reservation: 1g
     ports:
       - "9000:9000"
-    environment:
-      - HOST=0.0.0.0
 
 #  db:
 #    image: postgres
