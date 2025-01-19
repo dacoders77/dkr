@@ -2,66 +2,42 @@ Screen {
     align: center middle;
 }
 
-.box {
+.title-box {
     align: center middle;
-    border: solid green;
+    border: transparent;
     width: auto;
     height: auto;
 }
 
-
-.log-box {
-    content-align: center middle;
-    text-align: center;
+.log-box-container {
     border: heavy blue;
-    height: 10;
-    width: 60%;
-}
-
-.horizontal {
     align: center middle;
-    border: solid purple;
-    width: 30%;
+    height: 10;
+    width: 60%;
 }
 
-
-.log {
-    content-align: center middle;
-    color: red;
-    background: gray;
-    width: 20;
+# Log()
+.log-window {
+    height: 10;
+    background: transparent;
 }
 
-
-.buttons {
-    text-align: center;
+.menu-txt {
     border: white;
     height: 10;
     width: 60%;
 }
 
-.words {
-    border: white;
+.button-box {
+    align: center middle;
+    border: transparent;
     width: auto;
-    }
-
-.delete {
-    color: red;
-    border: blue;
-}
-
-
-#buttons-container {
-    align: center middle;
-    layout: horizontal;
-    background: black;
     height: auto;
-    margin-left: 5;
-    overflow-y: hidden;
 }
 
-
-Button {
-    width: 25;
+.spark {
+    width: 20;
+    border: red;
+    height: 10;
+    margin: 5;
 }
-

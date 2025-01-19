@@ -1,6 +1,5 @@
 # https://textual.textualize.io/tutorial/
 from cProfile import label
-from time import monotonic
 from textual.app import App, ComposeResult # The same for all apps
 from textual.containers import HorizontalGroup, VerticalScroll
 from textual.reactive import reactive
