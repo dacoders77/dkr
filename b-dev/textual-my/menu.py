@@ -5,6 +5,7 @@ from textual.app import App, ComposeResult
 from textual.containers import HorizontalGroup, Container, Horizontal, Vertical, Center
 from textual.widgets import Header, Footer, Label, Rule, Button, Digits, Log, Static, Sparkline
 from datetime import datetime
+from textual_plotext import PlotextPlot
 
 
 # Logging in separate console: https://textual.textualize.io/guide/devtools/
@@ -32,7 +33,6 @@ class BorMenu(App):
             log_box = LogBox(classes="log-box-container") # Box for log output
             log_box.border_subtitle = "Log"
             # log_box.visible = False # Works, but just hides it. Not removes from DOM
-            remove(log_box)
             yield log_box
 
         # Sparkline test
@@ -41,6 +41,9 @@ class BorMenu(App):
                 [10, 20, 15, 30, 25, 20, 15],
             )
             yield Container(sparkline, classes="spark")
+
+        # Plot chart
+        yield PlotextPlot()
 
 
 
@@ -68,7 +71,12 @@ class BorMenu(App):
         #label.border_title = "Virtual Pet Game"
         #label.border_subtitle = "Evolution v.2"
         #self.static.styles.border = ("heavy", "yellow")
-        pass
+
+        # Plot chart
+        plt = self.query_one(PlotextPlot).plt
+        y = plt.sin()  # sinusoidal test signal
+        plt.scatter(y)
+        plt.title("Scatter Plot")  # to apply a title
 
     # Output test log msg and the list of all widgets
     def on_ready(self) -> None:

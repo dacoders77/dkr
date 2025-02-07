@@ -13,26 +13,26 @@ services:
     ports:
       - "9000:9000"
 
-#  db:
-#    image: postgres
-#    container_name: bor-db
-#    restart: always
-#    shm_size: 128mb
-#    ports:
-#      - "5432:5432"
-#    environment:
-#      POSTGRES_USER: bor
-#      POSTGRES_PASSWORD: 659111
-#      POSTGRES_DB: boris
-#    volumes:
-#      - ./pgdata:/var/lib/postgresql/data
+  db:
+    image: postgres
+    container_name: bor-db
+    restart: always
+    shm_size: 128mb
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: bor
+      POSTGRES_PASSWORD: 659111
+      POSTGRES_DB: boris
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
 
-#  pgadmin:
-#    image: dpage/pgadmin4:latest
-#    container_name: pgadmin
-#    restart: always
-#    ports:
-#      - "80:80" # When adding new db server. In the connection tab use Host name / address: bor-db (container name, no need to use ip)
-#    environment:
-#      PGADMIN_DEFAULT_EMAIL: bor@bor.com # Pgadmin login
-#      PGADMIN_DEFAULT_PASSWORD: 659111 # Pgadmin pass
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    restart: always
+    ports:
+      - "80:80" # When adding new db server. In the connection tab use Host name / address: bor-db (container name, no need to use ip)
+    environment:
+      PGADMIN_DEFAULT_EMAIL: bor@bor.com # Pgadmin login
+      PGADMIN_DEFAULT_PASSWORD: 659111 # Pgadmin pass
