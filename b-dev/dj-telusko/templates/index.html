@@ -272,7 +272,14 @@
 					<div class="col text-center">
 						<div class="section_subtitle">simply amazing places</div>
 						<div class="section_title">
-							<h2>Popular Destinations</h2>
+							<h2>Popular Destinations bro</h2>
+
+							{{ name }}	
+
+							{% for key, value in name.items %}
+							<p>{{ key }} {{ value }}</p>
+							{% endfor %}
+
 						</div>
 					</div>
 				</div>
@@ -280,6 +287,11 @@
 					<div class="col">
 						<div class="destinations_container item_grid">
 
+
+						
+
+						<!--
+							
 							{% for dest in dests %}
 							<!-- Destination -->
 							<div class="destination item">
@@ -298,6 +310,7 @@
 							</div>
 
 							{% endfor %}
+						-->
 
 						</div>
 					</div>

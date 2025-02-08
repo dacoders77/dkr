@@ -25,7 +25,7 @@ def hello_world(request):
 
 urlpatterns = [
     path('admin/', admin.site.urls), # Default admin page
-
-    path('', include('travello.urls')) # simialr to /travello/urls.py
+    path('', include('travello.urls')), # simialr to /travello/urls.py
+    path('yo/', hello_world)
     #path('', hello_world) # test. hellow_world - passing a function itself, it will be called when a request is made. The function will not be called right away
 ]

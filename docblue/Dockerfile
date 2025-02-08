@@ -16,7 +16,7 @@ RUN python3 -m venv /venv
 
 # Install dependencies to virtual environment. No need to activate first
 #RUN /venv/bin/pip install --no-cache-dir pip textual textual-dev
-RUN /venv/bin/pip install pip textual textual-dev django
+RUN /venv/bin/pip install textual textual-dev django django-debug-toolbar
 
 
 
