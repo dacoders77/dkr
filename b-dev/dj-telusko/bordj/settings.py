@@ -11,9 +11,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-import os
+import os, socket
 
-from django.conf.global_settings import STATIC_ROOT
+from django.conf.global_settings import STATIC_ROOT, MEDIA_ROOT, MEDIA_URL
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,17 +30,26 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Get local ips for debug console
+hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+
 # debugger
 INTERNAL_IPS = [
     '127.0.0.1',
     'localhost',
-    '172.18.0.1' # Must set this ip from docker. Debug console will not work othervice. Add to view: print(request.META['REMOTE_ADDR'])
-]
+] + [ip[:-1] + "1" for ip in ips] # Add local ips to enable django debug console
+
+
+
+print(f"INTERNAL_IPS: {INTERNAL_IPS}")
+
 
 # Application definition
 
 INSTALLED_APPS = [
     'debug_toolbar', # for dubuger
+    'travello', # test app
+    'accounts', # user registration
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -86,8 +95,13 @@ WSGI_APPLICATION = 'bordj.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # Postgress
+        'ENGINE': 'django.db.backends.postgresql',
+        'PORT': '5432',   # for Postgres
+        'NAME': 'dj-telusko',
+        'USER': 'bor',
+        'PASSWORD': '659111',
+        'HOST': 'bor-db', # Use docker container name, no ip needed. The same for pg-admin access
     }
 }
 
@@ -133,6 +147,12 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+
+
 
 
 # Default primary key field type

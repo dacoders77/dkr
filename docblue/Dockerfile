@@ -5,7 +5,7 @@ WORKDIR /home/bor
 
 # Install Python and necessary tools
 RUN apt-get update && \
-    apt-get install -y python3.12 python3.12-venv python3.12-dev python3-pip git nano nginx && \
+    apt-get install -y python3.12 python3.12-venv python3.12-dev python3-pip git nano nginx postgresql-client && \
     echo "Dockerfile. Python and tools installed"
 
 # Postgres deps for django
@@ -16,7 +16,8 @@ RUN python3 -m venv /venv
 
 # Install dependencies to virtual environment. No need to activate first
 #RUN /venv/bin/pip install --no-cache-dir pip textual textual-dev
-RUN /venv/bin/pip install textual textual-dev django django-debug-toolbar
+RUN /venv/bin/pip install textual textual-dev django django-debug-toolbar psycopg2 Pillow
+
 
 
 

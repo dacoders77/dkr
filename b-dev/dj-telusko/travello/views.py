@@ -1,20 +1,18 @@
 from http.client import responses
-from django.shortcuts import render
 from django.http import HttpResponse
+from django.shortcuts import render
 from .models import *
 
 # Called from urls 
 
 def index(request):
-    dest = Destination() # Object from models.py
-    dest.name = "Moscow"
-    dest.desc = "desc"
 
-    arr = {"a":"2", "b":"3", "c":"88"}
+    destinations = Destination.objects.all()
 
     #return HttpResponse("<h1>Hello, world. You're at the polls home view.</h1>")
-    return render(request, "index.html", {"name": arr}) # Index.html is in templates/. Passing a test array 
+    return render(request, "index.html", {"dests": destinations}) # Index.html is in templates/. Passing a test array
 
+# Test debug method to see ip for django debug console
 def debug(request):
-    print(request.META['REMOTE_ADDR']) # See the ip address on which docker runs the server 
+    print("travello/views.py internal ip for debug console: " + request.META['REMOTE_ADDR']) # See the ip address on which docker runs the server
     return render(request, "debug.html")
