@@ -66,5 +66,7 @@ def login(request):
         return render(request, "login.html")
 
 def logout(request):
-    pass
+    auth.logout(request)
+    return redirect("/") # Go back to home page
+
 

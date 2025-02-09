@@ -36,9 +36,21 @@
 									<ul class="d-flex flex-row align-items-start justify-content-start">
 										<li class="active"><a href="index.html">Home</a></li>
 										<li><a href="contact.html">Contact</a></li>
-                                        
-                                        <li><a href="accounts/register">Register</a></li>
-                                        <li><a href="accounts/login">Login</a></li>
+
+                                        <h1>{{ user }}</h1>
+                                        {% if user.is_authenticated %}
+                                            <li><a href="accounts/logout">Logout</a></li>
+                                            {% else %}
+                                            <li><a href="accounts/register">Register</a></li>
+                                            <li><a href="accounts/login">Login</a></li>
+                                        {% endif %}
+
+    <script>
+        // I can output Jinja vars in js. 
+        // Better to assign a default value via | if not sure that a var is assigned 
+        console.log("{{ user.is_authenticated|default:"nothing"}} yo");
+    </script>
+
                                         
 									</ul>
 								</nav>
