@@ -16,8 +16,8 @@
         <div class="card card-body">
             <h5>Contact Information:</h5>
             <hr>
-            <p>Email: </p>
-            <p>Phone: </p>
+            <p>Email: {{ customer.email }}</p>
+            <p>Phone: {{ customer.phone }}</p>
         </div>
     </div>
 
@@ -25,7 +25,7 @@
         <div class="card card-body">
             <h5>Total Orders:</h5>
             <hr>
-            <h1 style="text-align: center; padding: 10px;"></h1>
+            <h1 style="text-align: center; padding: 10px;">{{ orders.count }}</h1>
         </div>
     </div>
 </div>
@@ -55,20 +55,19 @@
                     <th>Update</th>
                     <th>Remove</th>
                 </tr>
-                <!-- Example row, you can add more rows dynamically -->
-                <tr>
-                    <td>Product 1</td>
-                    <td>Category 1</td>
-                    <td>2023-10-01</td>
-                    <td>Shipped</td>
-                    <td><button class="btn btn-sm btn-info">Update</button></td>
-                    <td><button class="btn btn-sm btn-danger">Remove</button></td>
-                </tr>
-                <!-- Add more rows as needed -->
+                {% for order in orders %}
+                    <tr>
+                        <td>{{ order.product }}</td>
+                        <td>{{ order.product.category }}</td>
+                        <td>{{ order.date_created }}</td>
+                        <td>{{ order.status }}</td>
+                        <th><a href="{% url 'update_order' order.id %}" class="btn btn-sm btn-info">Update</a></th>
+                        <th><a href="{% url 'delete_order' order.id %}" class="btn btn-sm btn-danger">Delete</a></th>
+                    </tr>
+                {% endfor %}
             </table>
         </div>
     </div>
 </div>
 
 {% endblock %}
-

@@ -48,7 +48,7 @@ class Order(models.Model):
 
     # Show name in admin panel. Not shown by default
     def __str__(self):
-        return str(self.date_created)
+        return str(self.product.name)
 
 
 
