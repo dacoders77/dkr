@@ -1,0 +1,16 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+
+     <div class="container-fluid">
+        <div class="row">
+            {% for fm in form %}
+            <div class="col-3">
+                <label >{{fm.label}}</label>
+                {{fm}}
+            </div>
+            {% endfor %}
+        </div>
+     </div>
+
+{% endblock %}

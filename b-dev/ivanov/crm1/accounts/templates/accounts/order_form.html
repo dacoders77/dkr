@@ -2,22 +2,89 @@
 {% load static %}
 {% block content %}
 
-
 <br>
 <div class="row">
+
     <div class="col-md-6">
         <div class="card card-body">
 
-         <form action="" method="POST">
-             {% csrf_token %}
-            {{ form }}
+            <!--
+            <table class="table table-sm">
+                <tr>
+                    <td><label for="{{ form.customer.id_for_label }}">Customer</label>{{ form.customer }}</td>
+                    <td><label for="{{ form.product.id_for_label }}">Product</label>{{ form.product }}</td>
+                    <td><label for="{{ form.status.id_for_label }}">Status</label>{{ form.status }}</td>
+                </tr>
+            </table>
+
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="{{ form.customer.id_for_label }}">Customer</label>
+                    {{ form.customer }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.product.id_for_label }}">Product</label>
+                    {{ form.product }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.status.id_for_label }}">Status</label>
+                    {{ form.status }}
+                </div>
+                <input type="submit" value="submit" class="btn btn-primary">
+            </form>
+            -->
+
+
+{#            <form action="" method="POST">#}
+{#                {% csrf_token %}#}
+{#                {{ formset.management_form }}#}
+{#                {% for form in formset %}#}
+{#                    {{ form }}#}
+{#                    <hr>#}
+{#                {% endfor %}#}
+{#            <input type="submit" value="submit">#}
+{#            </form>#}
+
+
+        <div class="container-fluid">
+        <div class="row">
+
+{#            <form action="" method="POST">#}
+{#                {% csrf_token %}#}
+{#                {{ formset.management_form }}#}
+{#                {% for form in formset %}#}
+{#                    <div class="col-3">#}
+{#                    {{ form }}#}
+{#                    </div>#}
+{#                {% endfor %}#}
+{#            </form>#}
+
+            <form action="" method="POST">
+            {% csrf_token %}
+            {{ formset.management_form }}
+
+                {% for fm in formset %}
+                <div class="row" style="border: 0px solid red">
+
+                    {% for field in fm %}
+                        {% if field.name != 'DELETE' and field.name != 'id' and field.name != 'customer' %}
+                        <div class="col-4">  <!-- Adjust column size as needed -->
+                        <label>{{ field.label }}</label>
+                        {{ field }}
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+
+                </div>
+                {% endfor %}
+
             <input type="submit" value="submit">
-        </form>
+            </form>
 
-
+        </div>
         </div>
     </div>
 </div>
-
 
 {% endblock %}

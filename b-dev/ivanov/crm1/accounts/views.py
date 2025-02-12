@@ -1,7 +1,12 @@
+from dataclasses import fields
+
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import * # Import all models
-from .forms import OrderForm
+from .forms import *
+from django.forms import inlineformset_factory # To use multiple forms in one object
+from .filters import OrderFilter
+
 
 def home(request):
     orders = Order.objects.all()
@@ -22,18 +27,29 @@ def customer(request, pk_test):
     customer = Customer.objects.get(pk=pk_test)
     orders = customer.order_set.all() # Query child objects
     order_count = orders.count()
-    context = {'customer': customer, 'orders':orders, 'order_count':order_count}
+
+    # On search button click
+    myFilter = OrderFilter(request.GET, queryset=orders)
+    orders = myFilter.qs
+
+
+    context = {'customer': customer, 'orders':orders, 'order_count':order_count, 'myFilter':myFilter}
     return render(request, 'accounts/customer.html', context)
 
-def create_order(request):
-    form = OrderForm()
+def create_order(request, pk):
+    # Parent model, child model. Then what fields we allow from child model. Extra - how many rows to show
+    OrderFormSet = inlineformset_factory(Customer, Order, fields=('product', 'status'), extra=2)
+    customer = Customer.objects.get(pk=pk) # Get the customer using passes id from the form
+    formset = OrderFormSet(queryset=Order.objects.none(), instance=customer)
+
     if request.method == 'POST':
-        form = OrderForm(request.POST)
-        if form.is_valid():
-            form.save()
+        #form = OrderForm(request.POST)
+        formset = OrderFormSet(request.POST, instance=customer)
+        if formset.is_valid():
+            formset.save()
             return redirect('/')
 
-    context = {'form': form}
+    context = {'formset': formset}
     return render(request, 'accounts/order_form.html', context)
 
 def updateOrder(request, pk):
@@ -56,6 +72,21 @@ def deleteOrder(request, pk):
         return redirect('/')
     context = {'item': order}
     return render(request, 'accounts/delete.html', context)
+
+# Test form. Delete
+def Demoview(request):
+    if request.method == 'POST':
+        form = DemoForm(request.POST)  # Bind the form to POST data
+        if form.is_valid():  # Validate the form
+            form.save()  # Save the data to the database
+            return redirect('/')  # Redirect to a success page
+    else:
+        form = DemoForm()  # Create an empty form for GET requests
+
+    context = {'form': form}
+    return render(request, 'accounts/test_form.html', context)
+
+    #return render(request, 'accounts/test_form.html')
 
 
 

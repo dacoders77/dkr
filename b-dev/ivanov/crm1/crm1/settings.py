@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'accounts', # Our app
+    'django_filters', # django-filter
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

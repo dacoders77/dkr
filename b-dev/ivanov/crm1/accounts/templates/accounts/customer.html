@@ -8,7 +8,7 @@
             <h5>Customer:</h5>
             <hr>
             <a class="btn btn-outline-info  btn-sm btn-block" href="">Update Customer</a>
-            <a class="btn btn-outline-danger  btn-sm btn-block" href="">Delete Customer</a>
+            <a class="btn btn-outline-danger  btn-sm btn-block" href="{% url 'create_order' customer.id %}">Create Order</a>
         </div>
     </div>
 
@@ -32,12 +32,46 @@
 
 <br>
 
+<!-- Test form. Delete -->
+{% block body %}
+     <div class="container-fluid">
+        <div class="row">
+            {% for fm in form %}
+            <div class="col-6">
+                <label >{{fm.label}}</label>
+                {{fm}}
+            </div>
+            {% endfor %}
+        </div>
+     </div>
+{% endblock body %}
+
 <div class="row">
     <div class="col">
         <div class="card card-body">
-            <form method="get">
+
+            <!--
+            <form method="GET">
+                {{ myFilter.form }}
                 <button class="btn btn-primary" type="submit">Search</button>
             </form>
+            -->
+
+            <form action="" method="GET">
+
+                <div class="row" style="border: 0px solid red">
+                    {% for fm in myFilter.form %}
+                        <div class="col-3">
+                        {{ fm.label }}
+                        {{ fm }}
+                        </div>
+                    {% endfor %}
+                </div>
+            <div class="col-3 d-flex align-items-end"><input type="submit" value="submit"></div>
+
+            </form>
+
+
         </div>
     </div>
 </div>
@@ -49,7 +83,7 @@
             <table class="table table-sm">
                 <tr>
                     <th>Product</th>
-                    <th>Category</th>
+                    <th>Note</th>
                     <th>Date Ordered</th>
                     <th>Status</th>
                     <th>Update</th>
@@ -58,7 +92,7 @@
                 {% for order in orders %}
                     <tr>
                         <td>{{ order.product }}</td>
-                        <td>{{ order.product.category }}</td>
+                        <td>{{ order.notes }}</td>
                         <td>{{ order.date_created }}</td>
                         <td>{{ order.status }}</td>
                         <th><a href="{% url 'update_order' order.id %}" class="btn btn-sm btn-info">Update</a></th>
